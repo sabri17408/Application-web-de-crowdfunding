@@ -1,0 +1,217 @@
+<html lang="en">    <head>
+        <meta charset="utf-8">
+        <title>FundMe</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta content="Free Website Template" name="description">
+
+        <!-- Favicon -->
+        <link th:href="@{/img/favicon.ico}" rel="icon">
+
+        <!-- Google Font -->
+        <link th:href="@{https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap}" rel="stylesheet">
+        
+        <!-- CSS Libraries -->
+        <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css}" rel="stylesheet">
+        <link th:href="@{/lib/flaticon/font/flaticon.css}" rel="stylesheet">
+        <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+        <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+  
+        <!-- Template Stylesheet -->
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+
+    <body>
+        <!-- Top Bar Start -->
+        <div class="top-bar d-none d-md-block">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="top-bar-left">
+                            <div class="text">
+                                <i class="fa fa-phone-alt"></i>
+                                <p>+123 456 7890</p>
+                            </div>
+                            <div class="text">
+                                <i class="fa fa-envelope"></i>
+                                <p>sabri.siham@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="top-bar-right">
+                            <div class="social">
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top Bar End -->
+
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">FundMe</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a th:href="@{/index}" class="nav-item nav-link">Acceuil</a>
+                        <a th:href="@{/discoverprojects}" class="nav-item nav-link">Découvrir les projets</a>
+                      <a sec:authorize="isAuthenticated()" th:href="@{/formproject}" class="nav-item nav-link">Lancer un projet</a>
+
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="nav-item nav-link">Se connecter</a>
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/register}" class="nav-item nav-link">Créer un compte</a>
+
+                        
+                        
+                        <div sec:authorize="isAuthenticated()" class="nav-item dropdown">
+     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> <b sec:authorize="isAuthenticated()" ><span sec:authentication="principal.fullName"></span></b></a>
+                            <div class="dropdown-menu">
+                            
+                          <a  sec:authorize="isAuthenticated()" th:href="@{/UserProjets}" class="dropdown-item">Mes Projets</a>
+                          <a  sec:authorize="isAuthenticated()" th:href="@{/UserContrib}" class="dropdown-item">Mes Contributions</a>
+
+                            <form class="dropdown-item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                            <input id="logout" type="submit" value="Déconnexion" />
+                            </form>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+
+
+ <!-- Page Header Start -->
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>FundMe</h2>
+                    </div>
+                    <div class="col-12">
+                        <a href="">Acceuil</a>
+                        <a href="">Créer un compte</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+        
+        
+        <!-- Volunteer Start -->
+        <div class="container">
+            <div class="volunteer" data-parallax="scroll" >
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <div class="volunteer-form">
+                            <form th:action="@{/register}" th:object="${user}" method="post">
+                                <div class="control-group">
+                                    <input type="text" th:field="*{username}" name="username" class="form-control" placeholder="Username" required="required" />
+                                </div>
+                                <div class="control-group">
+                                    <input type="text" th:field="*{email}" name="email" class="form-control" placeholder="Email" required="required" />
+                                </div>
+                                <div class="control-group">
+                                    <input type="password" th:field="*{password}" name="password" class="form-control" placeholder="password" required="required" />
+                                </div>
+                                <div>
+                                    <button class="btn btn-custom" type="submit">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <!-- Volunteer End -->
+
+
+ <!-- Footer Start -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-contact">
+                            <p><i class="fa fa-map-marker-alt"></i>Casablanca, Morocco</p>
+                            <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                            <p><i class="fa fa-envelope"></i>info@example.com</p>
+                            <div class="footer-social">
+                                <a class="btn btn-custom" href="https://freewebsitecode.com"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-custom" href="https://facebook.com/freewebsitecode"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-custom" href="https://www.youtube.com/channel/UC9HlQRmKgG3jeVD_fBxj1Pw/videos"><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-custom" href="https://freewebsitecode.com"><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-custom" href="https://freewebsitecode.com"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-link">
+                            <h2>Popular Links</h2>
+                            <a href="">Acceuil</a>
+                            <a href="">Discover the projects</a>
+                 
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                       
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container copyright">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; <a href="https://freewebsitecode.com">FundMe</a>, All Right Reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p> <a href="https://freewebsitecode.com">Sabri Siham</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        
+<!-- Back to top button -->
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+         <!-- JavaScript Libraries -->
+        <script data-th-src="@{https://code.jquery.com/jquery-3.4.1.min.js}"></script>
+        <script data-th-src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js}"></script>
+        <script data-th-src="@{/lib/easing/easing.min.js}"></script>
+        <script data-th-src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+        <script data-th-src="@{/lib/waypoints/waypoints.min.js}"></script>
+        <script data-th-src="@{/lib/counterup/counterup.min.js}"></script>
+        <script data-th-src="@{/lib/parallax/parallax.min.js}"></script>
+        
+        <!-- Contact Javascript File -->
+        <script data-th-src="@{/mail/jqBootstrapValidation.min.js}"></script>
+        <script data-th-src="@{/mail/contact.js}"></script>
+
+        <!-- Template Javascript -->
+        <script data-th-src="@{/img/js/main.js}"></script>
+    </body>
+</html>
+
+

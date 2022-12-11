@@ -1,0 +1,386 @@
+<html lang="en">    <head>
+        <meta charset="utf-8">
+        <title>FundMe</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta content="Free Website Template" name="description">
+
+        <!-- Favicon -->
+        <link th:href="@{/img/favicon.ico}" rel="icon">
+
+        <!-- Google Font -->
+        <link th:href="@{https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap}" rel="stylesheet">
+        
+        <!-- CSS Libraries -->
+        <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css}" rel="stylesheet">
+        <link th:href="@{/lib/flaticon/font/flaticon.css}" rel="stylesheet">
+        <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+        <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+  
+        <!-- Template Stylesheet -->
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+
+    <body>
+        <!-- Top Bar Start -->
+        <div class="top-bar d-none d-md-block">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="top-bar-left">
+                            <div class="text">
+                                <i class="fa fa-phone-alt"></i>
+                                <p>+123 456 7890</p>
+                            </div>
+                            <div class="text">
+                                <i class="fa fa-envelope"></i>
+                                <p>sabri.siham@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="top-bar-right">
+                            <div class="social">
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top Bar End -->
+
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">FundMe</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a th:href="@{/index}" class="nav-item nav-link">Acceuil</a>
+                        <a th:href="@{/discoverprojects}" class="nav-item nav-link">Découvrir les projets</a>
+                      <a sec:authorize="isAuthenticated()" th:href="@{/formproject}" class="nav-item nav-link">Lancer un projet</a>
+
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="nav-item nav-link">Se connecter</a>
+                        <a sec:authorize="!isAuthenticated()" th:href="@{/register}" class="nav-item nav-link">Créer un compte</a>
+
+                        
+                        
+                        <div sec:authorize="isAuthenticated()" class="nav-item dropdown">
+     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> <b sec:authorize="isAuthenticated()" ><span sec:authentication="principal.fullName"></span></b></a>
+                            <div class="dropdown-menu">
+                            
+                          <a  sec:authorize="isAuthenticated()" th:href="@{/UserProjets}" class="dropdown-item">Mes Projets</a>
+                          <a  sec:authorize="isAuthenticated()" th:href="@{/UserContrib}" class="dropdown-item">Mes Contributions</a>
+
+                            <form class="dropdown-item" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                            <input id="logout" type="submit" value="Déconnexion" />
+                            </form>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+
+
+ <!-- Page Header Start -->
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>FundMe</h2>
+                    </div>
+                    <div class="col-12">
+                        <a href="">Acceuil</a>
+                        <a href="">Découvrir un projet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+        
+         <!-- view project -->
+          <!-- view project-->
+         <!-- About Start -->
+        <div class="about">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                                                    <img class="about-img" th:src="${projet.photosImagePath}" alt="Image" width=300 heigh="50%" height="50%">
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="section-header">
+                            <p th:text="${projet.getUser().getUsername()}"></p>
+                            <h2 th:text="${projet.nomProjet}"></h2>
+                        </div>
+                        <div class="about-tab">
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="pill" href="#tab-content-1">Details</a>
+                                </li>
+                                <!--<li class="nav-item">
+                                    <a class="nav-link" data-toggle="pill" href="#tab-content-2">Mission</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="pill" href="#tab-content-3">Vision</a>
+                                </li>-->
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="tab-content-1" class="container tab-pane active">
+                                
+                                
+                                <div class="event-content">
+                                <div class="event-meta">
+                                    <p ><i class="fa fa-calendar-alt" ></i><span th:text="${projet.dateDebut}"></span></p>
+                                    <p><i class="far fa-clock" ></i><span th:text="${projet.delaiProjet}"></span><span> Jours</span></p>
+                                   <p> <i class="fa fa-map-marker-alt"  ></i><span th:text="${projet.adresse}"></span></p>
+                                </div>
+                                <div class="event-text">
+                                 <div class="causes-progress">
+                            
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" th:aria-valuenow="${projet.pourcentage}" aria-valuemin="0" aria-valuemax="100">
+                                    <strong th:text="${projet.pourcentage}"></strong>
+                                </div>
+                            </div>
+                            <div class="progress-text">
+                                <p><strong>Raised (DH): </strong><span th:text="${projet.montantInvestissemnt}"> $100000<span></p>
+                                <p><strong>Goal (DH): </strong><span th:text="${projet.fondsALever}"> $50000</span></p>
+                            </div>
+                        </div>
+                                    
+                                   
+                                    <a class="btn btn-custom" sec:authorize="isAuthenticated()" th:href="@{'/projet/contribution/'+${projet.id}}" >Contribute</a>
+                                </div>
+                            </div>
+                                </div>
+                               <!-- <div id="tab-content-2" class="container tab-pane fade">
+                                    Sed tincidunt, magna ut vehicula volutpat, turpis diam condimentum justo, posuere congue turpis massa in mi. Proin ornare at massa at fermentum. Nunc aliquet sed nisi iaculis ornare. Nam semper tortor eget est egestas, eu sagittis nunc sodales. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent bibendum sapien sed purus molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </div>
+                                <div id="tab-content-3" class="container tab-pane fade">
+                                    Aliquam dolor odio, mollis sed feugiat sit amet, feugiat ut sapien. Nunc eu dignissim lorem. Suspendisse at hendrerit enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed condimentum semper turpis vel facilisis. Nunc vel faucibus orci. Mauris ut mauris rhoncus, efficitur nisi at, venenatis quam. Praesent egestas pretium enim sit amet finibus. Curabitur at erat molestie, tincidunt lorem eget, consequat ligula.
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        </br>
+            </br>
+            </br>
+
+            <div class="container">
+                <div class="row align-items-center">
+                    
+                        
+                        <div class="about-tab">
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="pill" href="#tab-content-1">Description </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:text="|contributions (${projet.getContributions().size()}) |" data-toggle="pill" href="#tab-content-2">Contributions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:text="|Commentaires (${projet.getComments().size()}) |" data-toggle="pill" href="#tab-content-3">Commentaires(4)</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="tab-content-1" class="container tab-pane active">
+<p th:text="${projet.descriptionProjet}">
+                                    </p>                                </div>
+                                <div id="tab-content-2" class="container tab-pane fade">
+                                
+                                        <!-- Blog Start -->
+        <div class="blog">
+            <div class="container">
+                
+                <div class="row">
+                    <div class="col-lg-4" th:each="contrib : ${projet.getContributions()}">
+                        <div class="blog-item">
+                 
+                            <div class="blog-text">
+                                <h3 ><a  th:text="${contrib.getUser().getUsername()}"href="#"></a></h3>
+                                <p  th:text="| Merci, les fonds du projet ont été augmentés de ${contrib.montantInvistissement} DH le ${contrib.dataInvistissement}|">
+                                </p>
+                            </div>
+                           
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+        <!-- Blog End -->
+                                </div>
+                                <div id="tab-content-3" class="container tab-pane fade">
+                                
+                       <!-- Button trigger modal -->
+<button sec:authorize="isAuthenticated()" type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#exampleModal'+*{projet.id}">
+Ajouter un commentaire</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="*{'exampleModal'+{projet.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter un commentaire</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form  id="frmAddComment" method="POST" th:action="@{/addcomment}" th:object="${comment}">
+
+                        <div class="form-group">
+                             <input class="form-control" name="projet" type="text" th:value="*{projet.id}" hidden/>
+
+                            <textarea class="form-control" id="comment" rows="3" th:field="*{body}"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" >Add Comment</button>
+                    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>         
+                    
+
+                    <hr />
+                                        <br />
+
+
+                <div class="card" th:each="comment : ${projet.getComments()}">
+                  <div class="card-body">
+
+                    <div id="comment" class="answer" style="padding: 15px;">
+                <span
+                        class="text-muted" style="margin-top: 10px;margin-bottom: 20px;font-size: 15px;">
+                    <span th:title="${comment.getCreationDate()}"
+                        th:datetime="${comment.getCreationDate()}" th:text="${comment.getCreationDate()}"
+
+                ></span> by <a
+                        href="#"
+                        style="color: rgb(0,123,255);" th:text="${comment.getUser().getUsername()}"
+                ></a
+                ></span
+                >
+                        <p th:text="${comment.getBody()}"
+                                style="color: rgba(0,0,0,0.93);margin: 0;margin-top: 10px;font-size: 15px;"
+                        >
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                            quam urna, dignissim nec auctor in, mattis vitae leo. Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit.&nbsp;Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+                    </div>
+                </div>
+                
+  </div>
+                
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            
+            
+        </div>
+        <!-- About End -->
+
+        
+        
+        
+        
+    <!-- Footer Start -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-contact">
+                            <p><i class="fa fa-map-marker-alt"></i>Casablanca, Morocco</p>
+                            <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                            <p><i class="fa fa-envelope"></i>info@example.com</p>
+                            <div class="footer-social">
+                                <a class="btn btn-custom" href="https://freewebsitecode.com"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-custom" href="https://facebook.com/freewebsitecode"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-custom" href="https://www.youtube.com/channel/UC9HlQRmKgG3jeVD_fBxj1Pw/videos"><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-custom" href="https://freewebsitecode.com"><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-custom" href="https://freewebsitecode.com"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-link">
+                            <h2>Popular Links</h2>
+                            <a href="">Acceuil</a>
+                            <a href="">Discover the projects</a>
+                 
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                       
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container copyright">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; <a href="https://freewebsitecode.com">FundMe</a>, All Right Reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p> <a href="https://freewebsitecode.com">Sabri Siham</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        
+<!-- Back to top button -->
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+         <!-- JavaScript Libraries -->
+        <script data-th-src="@{https://code.jquery.com/jquery-3.4.1.min.js}"></script>
+        <script data-th-src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js}"></script>
+        <script data-th-src="@{/lib/easing/easing.min.js}"></script>
+        <script data-th-src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+        <script data-th-src="@{/lib/waypoints/waypoints.min.js}"></script>
+        <script data-th-src="@{/lib/counterup/counterup.min.js}"></script>
+        <script data-th-src="@{/lib/parallax/parallax.min.js}"></script>
+        
+        <!-- Contact Javascript File -->
+        <script data-th-src="@{/mail/jqBootstrapValidation.min.js}"></script>
+        <script data-th-src="@{/mail/contact.js}"></script>
+
+        <!-- Template Javascript -->
+        <script data-th-src="@{/img/js/main.js}"></script>
+    </body>
+</html>
+
